@@ -49,7 +49,7 @@ export const sendEmail = async ({
       html: `
       <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     
-    <img src="https://img.icons8.com/ios/50/duolingo-logo.png" alt="Clever Logo" style="display: block; margin: 0 auto 20px; border-radius: 8px;">
+    <img src="https://img.icons8.com/3d-fluency/94/cookie.png" alt="Clever Logo" style="display: block; margin: 0 auto 20px; border-radius: 8px;">
 
     <h1 style="text-align: center; color: #007bff; font-size: 2em; margin-bottom: 10px;">Hello!</h1>
     <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">You've received this message from Clever, your trusted platform.</p>
@@ -70,6 +70,7 @@ export const sendEmail = async ({
     <p style="text-align: center; font-size: 0.9em; margin-top: 20px;">If you did not request this action, please ignore this email.</p>
 
   </div>
+  
 
       
       `,
