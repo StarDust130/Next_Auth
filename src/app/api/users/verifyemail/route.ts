@@ -34,6 +34,9 @@ export async function POST(request: NextRequest) {
       success: true,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { message: "Error while verify email 😥" },
+      { status: 500 }
+    );
   }
 }

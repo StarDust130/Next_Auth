@@ -2,13 +2,11 @@ import { dbConnect } from "@/db/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { useRouter } from "next/navigation";
 import jwt from "jsonwebtoken";
 
 dbConnect();
 
 export async function POST(request: NextRequest) {
-  const router = useRouter();
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
@@ -19,7 +17,6 @@ export async function POST(request: NextRequest) {
     const user = await User.findOne({ email });
 
     if (!user) {
-      router.push("/signup");
       alert("User does not Exist 🤯");
       return NextResponse.json(
         { error: "User does not Exist 🤯" },

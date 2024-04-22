@@ -6,13 +6,14 @@ interface SendEmailProps {
   email: string;
   emailType: string;
   userId: string;
+  username: string;
 }
-
 
 export const sendEmail = async ({
   email,
   emailType,
   userId,
+  username,
 }: SendEmailProps) => {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
@@ -20,13 +21,17 @@ export const sendEmail = async ({
     //? Update the user with the token
     if (emailType === "VERIFIY") {
       await User.findByIdAndUpdate(userId, {
-        verifyToken: hashedToken,
-        verifyTokenExpiry: Date.now() + 3600000,
+        $set: {
+          verifyToken: hashedToken,
+          verifyTokenExpiry: (Date.now() + 3600000),
+        },
       });
     } else if (emailType === "RESET") {
       await User.findByIdAndUpdate(userId, {
-        forgotPasswordToken: hashedToken,
-        forgotPasswordTokenExpiry: Date.now() + 3600000,
+        $set: {
+          forgotPasswordToken: hashedToken,
+          forgotPasswordTokenExpiry: (Date.now() + 3600000),
+        },
       });
     }
 
@@ -51,7 +56,7 @@ export const sendEmail = async ({
     
     <img src="https://img.icons8.com/3d-fluency/94/cookie.png" alt="Clever Logo" style="display: block; margin: 0 auto 20px; border-radius: 8px;">
 
-    <h1 style="text-align: center; color: #007bff; font-size: 2em; margin-bottom: 10px;">Hello!</h1>
+    <h1 style="text-align: center; color: #007bff; font-size: 2em; margin-bottom: 10px;">Hello ${username}!</h1>
     <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">You've received this message from Clever, your trusted platform.</p>
      
     <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">Please click on the link below to ${
@@ -67,6 +72,7 @@ export const sendEmail = async ({
     <a href="${
       process.env.DOMAIN
     }/verifyemail?token=${hashedToken}" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-size: 1.2em; transition: background-color 0.3s; text-align: center;">Click here to proceed</a></center>
+    <p style="text-align: center; font-size: 0.9em; margin-top: 20px;">${hashedToken}</p>
     <p style="text-align: center; font-size: 0.9em; margin-top: 20px;">If you did not request this action, please ignore this email.</p>
 
   </div>
