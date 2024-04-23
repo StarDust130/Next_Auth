@@ -4,6 +4,7 @@ import { toast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Signup = () => {
   const router = useRouter();
@@ -45,7 +46,7 @@ const Signup = () => {
   }, [user]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 gap-5">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 gap-5 font-mono">
       <h1 className=" font-semibold text-4xl mb-10">
         {loading ? (
           <span>
@@ -104,6 +105,15 @@ const Signup = () => {
       >
         Signup
       </button>
+      <span className="font-mono">
+        Already Have Account!{" "}
+        <Link
+          className=" text-blue-500 font-bold hover:underline"
+          href="/login"
+        >
+          Login
+        </Link>
+      </span>
     </div>
   );
 };
